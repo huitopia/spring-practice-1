@@ -40,9 +40,18 @@
                     <input type="datetime-local" readonly="" class="form-control" id="inputInserted"
                            value="${memberInfo.inserted}">
                 </div>
+                <div>
+                    <button class="btn btn-outline-danger" form="formDelete">DELETE</button>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="d-none" onsubmit="return confirm('delete?')">
+    <form action="/member/remove" id="formDelete" method="post">
+        <input type="hidden" name="id" value="${memberInfo.id}">
+    </form>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"

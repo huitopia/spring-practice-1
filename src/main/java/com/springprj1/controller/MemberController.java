@@ -38,4 +38,10 @@ public class MemberController {
         model.addAttribute("memberInfo", service.getInfo(id));
         return "member/info";
     }
+
+    @PostMapping("remove")
+    public String remove(Integer id) {
+        service.deleteMemberById(id);
+        return "redirect:/";
+    }
 }
