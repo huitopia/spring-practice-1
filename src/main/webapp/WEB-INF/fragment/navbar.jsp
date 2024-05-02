@@ -16,6 +16,9 @@
                     <a class="nav-link" href="/add">Write</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/member/list">MemberList</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/member/signup">SighUp</a>
                 </li>
             </ul>
