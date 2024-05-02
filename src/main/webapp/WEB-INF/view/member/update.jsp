@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <h3 class="mb-4">회원 가입</h3>
-            <form action="/member/update" method="post">
+            <form action="/member/update" method="post" onsubmit="return checkValues()">
                 <%-- div*3>label.form-label+input.form-control--%>
                 <input type="hidden" value="${memberInfo.id}" name="id">
                 <div class="mb-3">
@@ -31,6 +31,10 @@
                            value="${memberInfo.password}">
                 </div>
                 <div class="mb-3">
+                    <label for="inputPasswordCheck" class="form-label">패스워드 확인</label>
+                    <input id="inputPasswordCheck" required type="password" class="form-control">
+                </div>
+                <div class="mb-3">
                     <label for="inputNickName" class="form-label">별명</label>
                     <input name="nickName" id="inputNickName" required type="text" class="form-control"
                            value="${memberInfo.nickName}">
@@ -42,6 +46,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    function checkValues() {
+        const password = document.getElementById("inputPassword").value;
+        const passwordCheck = document.getElementById("inputPasswordCheck").value;
+        if (password != "" && password == passwordCheck) {
+            return true;
+        } else {
+            alert("비밀번호 불일치")
+        }
+    }
+</script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
