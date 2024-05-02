@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -55,5 +56,12 @@ public class MemberController {
     public String modify(Member member) {
         service.updateInfoById(member);
         return "redirect:/member/list";
+    }
+
+    @GetMapping("email")
+    @ResponseBody
+    public String emailCheck(String email) {
+        String message = service.emailCheck(email);
+        return message;
     }
 }

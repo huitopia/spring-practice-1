@@ -33,4 +33,13 @@ public class MemberService {
     public void updateInfoById(Member member) {
         mapper.updateInfoById(member);
     }
+
+    public String emailCheck(String email) {
+        Member member = mapper.selectByEmail(email);
+        if (member == null) {
+            return "사용 가능";
+        } else {
+            return "이미 존재";
+        }
+    }
 }
