@@ -25,12 +25,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">패스워드</label>
-                    <input name="password" id="inputPassword" required type="password" class="form-control">
+                    <input oninput="passwordCheck()" name="password" id="inputPassword" required type="password"
+                           class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="inputPasswordCheck" class="form-label">패스워드 확인</label>
-                    <input id="inputPasswordCheck" required type="password" class="form-control">
+                    <input oninput="passwordCheck()" id="inputPasswordCheck" required type="password"
+                           class="form-control">
                 </div>
+                <div class="form-text" id="passwordMessage" style="color: red"></div>
                 <div class="mb-3">
                     <label for="inputNickName" class="form-label">별명</label>
                     <input name="nickName" id="inputNickName" required type="text" class="form-control">
@@ -51,6 +54,17 @@
             return true;
         } else {
             alert("비밀번호 불일치")
+        }
+    }
+
+    function passwordCheck() {
+        const password = document.querySelector("#inputPassword").value;
+        const passwordCheck = document.querySelector("#inputPasswordCheck").value;
+
+        if (password != passwordCheck) {
+            document.querySelector("#passwordMessage").textContent = "패스워드 불일치";
+        } else {
+            document.querySelector("#passwordMessage").textContent = "";
         }
     }
 </script>
