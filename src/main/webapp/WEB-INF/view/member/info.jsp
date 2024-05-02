@@ -55,7 +55,7 @@
     </form>
 </div>
 <div class="d-none" onsubmit="return confirm('update?')">
-    <form action="/member/update" id="formUpdate">
+    <form action="/member/modify?id=" id="formUpdate">
         <input type="hidden" name="id" value="${memberInfo.id}">
     </form>
 </div>

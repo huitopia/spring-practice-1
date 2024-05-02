@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <h3 class="mb-4">회원 가입</h3>
-            <form action="/member/update" method="post" onsubmit="return checkValues()">
+            <form action="/member/modify" method="post" onsubmit="return checkValues()">
                 <%-- div*3>label.form-label+input.form-control--%>
                 <input type="hidden" value="${memberInfo.id}" name="id">
                 <div class="mb-3">
@@ -27,13 +27,16 @@
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">패스워드</label>
-                    <input name="password" id="inputPassword" required type="password" class="form-control"
+                    <input oninput="passwordCheck()" name="password" id="inputPassword" required type="password"
+                           class="form-control"
                            value="${memberInfo.password}">
                 </div>
                 <div class="mb-3">
                     <label for="inputPasswordCheck" class="form-label">패스워드 확인</label>
-                    <input id="inputPasswordCheck" required type="password" class="form-control">
+                    <input oninput="passwordCheck()" id="inputPasswordCheck" required type="password"
+                           class="form-control">
                 </div>
+                <div class="form-text" id="passwordMessage" style="color: red"></div>
                 <div class="mb-3">
                     <label for="inputNickName" class="form-label">별명</label>
                     <input name="nickName" id="inputNickName" required type="text" class="form-control"
@@ -55,6 +58,17 @@
             return true;
         } else {
             alert("비밀번호 불일치")
+        }
+    }
+
+    function passwordCheck() {
+        const password = document.querySelector("#inputPassword").value;
+        const passwordCheck = document.querySelector("#inputPasswordCheck").value;
+
+        if (password != passwordCheck) {
+            document.querySelector("#passwordMessage").textContent = "패스워드 불일치";
+        } else {
+            document.querySelector("#passwordMessage").textContent = "";
         }
     }
 </script>

@@ -45,13 +45,13 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("update")
+    @GetMapping("modify")
     public String modifyInfo(Integer id, Model model) {
         model.addAttribute("memberInfo", service.getInfo(id));
-        return "member/update";
+        return "member/modify";
     }
 
-    @PostMapping("update")
+    @PostMapping("modify")
     public String modify(Member member) {
         service.updateInfoById(member);
         return "redirect:/member/list";
