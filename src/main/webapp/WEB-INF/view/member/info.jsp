@@ -42,6 +42,7 @@
                 </div>
                 <div>
                     <button class="btn btn-outline-danger" form="formDelete">DELETE</button>
+                    <button class="btn btn-outline-info" form="formUpdate">UPDATE</button>
                 </div>
             </div>
         </div>
@@ -50,6 +51,11 @@
 
 <div class="d-none" onsubmit="return confirm('delete?')">
     <form action="/member/remove" id="formDelete" method="post">
+        <input type="hidden" name="id" value="${memberInfo.id}">
+    </form>
+</div>
+<div class="d-none" onsubmit="return confirm('update?')">
+    <form action="/member/update" id="formUpdate">
         <input type="hidden" name="id" value="${memberInfo.id}">
     </form>
 </div>

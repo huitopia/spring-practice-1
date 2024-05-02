@@ -44,4 +44,16 @@ public class MemberController {
         service.deleteMemberById(id);
         return "redirect:/";
     }
+
+    @GetMapping("update")
+    public String modifyInfo(Integer id, Model model) {
+        model.addAttribute("memberInfo", service.getInfo(id));
+        return "member/update";
+    }
+
+    @PostMapping("update")
+    public String modify(Member member) {
+        service.updateInfoById(member);
+        return "redirect:/member/list";
+    }
 }
