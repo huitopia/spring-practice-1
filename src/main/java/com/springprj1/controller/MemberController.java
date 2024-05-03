@@ -3,6 +3,7 @@ package com.springprj1.controller;
 import com.springprj1.domain.Member;
 import com.springprj1.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,8 +59,10 @@ public class MemberController {
     }
 
     @PostMapping("modify")
-    public String modify(Member member, RedirectAttributes rttr) {
-        service.modify(member);
+    public String modify(Member member, RedirectAttributes rttr, Authentication authentication) {
+        if (service.hasAccess(member.getId(), authentication)) {
+            service.modify(member);
+        }
 
         rttr.addAttribute("id", member.getId());
         return "redirect:/member";
