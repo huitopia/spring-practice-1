@@ -45,10 +45,12 @@ public class MemberController {
     }
 
     @PostMapping("remove")
-    public String remove(Integer id) {
-        service.remove(id);
+    public String remove(Integer id, Authentication authentication) {
+        if (service.hasAccess(id, authentication)) {
+            service.remove(id);
+        }
 
-        return "redirect:/member/signup";
+        return "redirect:/logout";
     }
 
     @GetMapping("modify")
