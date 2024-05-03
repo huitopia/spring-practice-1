@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,10 +39,12 @@ public class BoardController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
-        // 게시물 목록 조회 해서 모델에 담기
-        model.addAttribute("boardList", service.list());
-        // jsp 포워드
+    public String home(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                       Model model) {
+        // 게시물 목록 조회(select)
+        // 모델에 넣고
+        model.addAllAttributes(service.list(page));
+        // jsp로 포워드
         return "board/home";
     }
 
