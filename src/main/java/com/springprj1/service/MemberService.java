@@ -2,6 +2,7 @@ package com.springprj1.service;
 
 import com.springprj1.domain.CustomUser;
 import com.springprj1.domain.Member;
+import com.springprj1.mapper.BoardMapper;
 import com.springprj1.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import java.util.List;
 public class MemberService {
 
     private final MemberMapper mapper;
+    private final BoardMapper boardMapper;
     private final BCryptPasswordEncoder encoder;
 
     public void signup(Member member) {
@@ -34,10 +36,21 @@ public class MemberService {
     }
 
     public void remove(Integer id) {
+        // board 테이블에서 레코드 삭제
+        boardMapper.deleteBoardByMemberId(id);
+        // member 테이블에서 레코드 삭제
         mapper.deleteById(id);
     }
 
     public void modify(Member member) {
+        if (member.getPassword() != null & member.getPassword().length() > 0) {
+            // 암호를 입력했을 때만 변경
+            member.setPassword(encoder.encode(member.getPassword()));
+        } else {
+            // 기존 암호 유지
+            Member old = mapper.selectById(member.getId());
+            member.setPassword(old.getPassword());
+        }
         mapper.update(member);
     }
 

@@ -51,7 +51,7 @@ ALTER TABLE board
 ALTER TABLE board
     ADD COLUMN member_id INT REFERENCES member (id);
 UPDATE board
-SET member_id = 9
+SET member_id = 10
 WHERE id > 0;
 
 DESC board;
