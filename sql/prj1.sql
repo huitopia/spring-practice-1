@@ -33,10 +33,31 @@ ALTER TABLE member
 SELECT *
 FROM member;
 
-# 페이징용
-INSERT INTO board (title, content, writer)
+# 페이징용..(게시물 복사해서 갯수 늘리기)
+INSERT INTO board
+    (title, content, writer)
 SELECT title, content, writer
 FROM board;
 
 SELECT COUNT(id)
 FROM board;
+
+# board 테이블 수정
+# writer 컬럼 지우기
+# member_id INT REFERENCES member(id) 컬럼 추가
+
+ALTER TABLE board
+    DROP COLUMN writer;
+ALTER TABLE board
+    ADD COLUMN member_id INT REFERENCES member (id);
+UPDATE board
+SET member_id = 9
+WHERE id > 0;
+
+DESC board;
+
+SELECT *
+FROM board
+LIMIT 3;
+SELECT *
+FROM member;

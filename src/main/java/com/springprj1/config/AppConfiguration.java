@@ -12,10 +12,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class AppConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf(csrf -> csrf.disable());
-        httpSecurity.formLogin(login -> login.loginPage("/login"));
-        return httpSecurity.build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable());
+        http.formLogin(login -> login.loginPage("/member/login"));
+        return http.build();
     }
 
     @Bean

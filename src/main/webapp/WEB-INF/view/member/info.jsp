@@ -14,51 +14,50 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
-            <h3 class="mb-4">회원정보</h3>
-            <%--div.mb-4>div*4>label.form-label+input[readonly].form-control--%>
-            <div class="mb-4">
+            <h3 class="mb-4">회원 정보</h3>
+            <%-- div>div.mb-3*4>label.form-label+input[readonly].form-control--%>
+            <div>
                 <div class="mb-3">
-                    email
-                    <label for="inputEmail" class="form-label"></label>
-                    <input type="email" readonly="" class="form-control" id="inputEmail" value="${memberInfo.email}">
+                    <label for="inputEmail" class="form-label">
+                        이메일
+                    </label>
+                    <input value="${member.email}" id="inputEmail" type="text" readonly="" class="form-control">
                 </div>
                 <div class="mb-3">
-                    password
-                    <label for="inputPassword" class="form-label"></label>
-                    <input type="password" readonly="" class="form-control" id="inputPassword"
-                           value="${memberInfo.password}">
+                    <label for="inputPassword" class="form-label">
+                        패스워드
+                    </label>
+                    <input value="${member.password}" id="inputPassword" type="text" readonly="" class="form-control">
                 </div>
                 <div class="mb-3">
-                    nickName
-                    <label for="inputNickName" class="form-label"></label>
-                    <input type="text" readonly="" class="form-control" id="inputNickName"
-                           value="${memberInfo.nickName}">
+                    <label for="inputNickName" class="form-label">
+                        별명
+                    </label>
+                    <input value="${member.nickName}" id="inputNickName" type="text" readonly="" class="form-control">
                 </div>
                 <div class="mb-3">
-                    inserted
-                    <label for="inputInserted" class="form-label"></label>
-                    <input type="datetime-local" readonly="" class="form-control" id="inputInserted"
-                           value="${memberInfo.inserted}">
+                    <label for="inputInserted" class="form-label">
+                        가입일시
+                    </label>
+                    <input value="${member.inserted}" id="inputInserted" type="text" readonly="" class="form-control">
                 </div>
+
                 <div>
-                    <button class="btn btn-outline-danger" form="formDelete">DELETE</button>
-                    <button class="btn btn-outline-info" form="formUpdate">UPDATE</button>
+                    <button class="btn btn-danger" form="formDelete">탈퇴</button>
+
+                    <a class="btn btn-secondary" href="/member/modify?id=${member.id}">정보 수정</a>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-
-<div class="d-none" onsubmit="return confirm('delete?')">
+<div class="d-none" onsubmit="return confirm('탈퇴하시겠습니까?')">
     <form action="/member/remove" id="formDelete" method="post">
-        <input type="hidden" name="id" value="${memberInfo.id}">
+        <input type="hidden" name="id" value="${member.id}">
     </form>
 </div>
-<div class="d-none" onsubmit="return confirm('update?')">
-    <form action="/member/modify?id=" id="formUpdate">
-        <input type="hidden" name="id" value="${memberInfo.id}">
-    </form>
-</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
         integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
