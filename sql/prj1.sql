@@ -80,4 +80,10 @@ FROM authority;
 
 SELECT *
 FROM member
-         LEFT JOIN authority a on member.id = a.memeber_id
+         LEFT JOIN authority a on member.id = a.memeber_id;
+
+# 컬럼명 변경
+ALTER TABLE authority
+    RENAME COLUMN memeber_id To member_id;
+
+
