@@ -87,5 +87,6 @@ public class MemberService {
                     .map(GrantedAuthority::getAuthority)
                     .anyMatch(s -> s.equals("admin"));
         }
+        return false;
     }
 }
