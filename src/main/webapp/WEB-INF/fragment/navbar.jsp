@@ -28,6 +28,15 @@
                         </li>
                     </sce:authorize>
                 </sec:authorize>
+
+                <%-- 로그인해야 보임 --%>
+                <sec:authorize access="isAuthenticated()">
+                    <sec:authentication property="principal.member" var="authMember"></sec:authentication>
+                    <li class="nav-item">
+                        <a href="/member?id=${authMember.id}" class="nav-link">My Info</a>
+                    </li>
+                </sec:authorize>
+
                 <sec:authorize access="not isAuthenticated()">
                     <li class="nav-item">
                         <a class="nav-link" href="/member/signup">SighUp</a>
