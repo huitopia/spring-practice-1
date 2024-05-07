@@ -3,6 +3,7 @@ package com.springprj1.controller;
 import com.springprj1.domain.Member;
 import com.springprj1.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,15 +34,24 @@ public class MemberController {
     }
 
     @GetMapping("list")
+    @PreAuthorize("hasAuthority('admin')")
+//    어드민 권한이 있을때만
     public String list(Model model) {
         model.addAttribute("memberList", service.list());
         return "member/list";
     }
 
     @GetMapping("")
-    public String info(Integer id, Model model) {
-        model.addAttribute("member", service.get(id));
-        return "member/info";
+    // 본인 정보 또는 어드민 권한만 실행
+    public String info(Integer id,
+                       Model model,
+                       Authentication authentication) {
+        if (service.hasAccess(id, authentication)) { // 권한이 있을 때만
+            model.addAttribute("member", service.get(id));
+            return "member/info";
+        } else { // 권한 없으면 home
+            return "redirect:/";
+        }
     }
 
     @PostMapping("remove")
