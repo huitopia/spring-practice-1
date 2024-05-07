@@ -1,6 +1,7 @@
 package com.springprj1.domain;
 
 import lombok.Getter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
@@ -11,7 +12,9 @@ public class CustomUser extends User {
     private Member member;
 
     public CustomUser(Member member) {
-        super(member.getEmail(), member.getPassword(), List.of());
+        super(member.getEmail(), member.getPassword(), List.of(
+                new SimpleGrantedAuthority("admin")
+        ));
         this.member = member;
     }
 }

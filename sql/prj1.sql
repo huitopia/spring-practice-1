@@ -59,5 +59,25 @@ DESC board;
 SELECT *
 FROM board
 LIMIT 3;
+
 SELECT *
 FROM member;
+
+DESC member;
+
+CREATE TABLE authority
+(
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    memeber_id INT         NOT NULL REFERENCES member (id),
+    name       VARCHAR(20) NOT NULL
+);
+
+INSERT INTO authority (memeber_id, name)
+VALUES (16, 'admin');
+
+SELECT *
+FROM authority;
+
+SELECT *
+FROM member
+         LEFT JOIN authority a on member.id = a.memeber_id

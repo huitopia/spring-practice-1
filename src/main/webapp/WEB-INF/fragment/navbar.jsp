@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sce" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
     <div class="container">
@@ -20,9 +21,12 @@
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/member/list">MemberList</a>
-                    </li>
+                    <%-- admin이 있으면 보임 --%>
+                    <sce:authorize access="hasAuthority('admin')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/list">MemberList</a>
+                        </li>
+                    </sce:authorize>
                 </sec:authorize>
                 <sec:authorize access="not isAuthenticated()">
                     <li class="nav-item">
