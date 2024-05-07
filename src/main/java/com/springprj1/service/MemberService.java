@@ -6,6 +6,7 @@ import com.springprj1.mapper.BoardMapper;
 import com.springprj1.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,5 +77,15 @@ public class MemberService {
             return member.getId().equals(id);
         }
         return false;
+    }
+
+    public boolean isAdmin(Authentication authentication) {
+        Object o = authentication.getPrincipal();
+        if (o instanceof CustomUser user) {
+            // 갖고 있는 권한중에 하나라도 admin 이면 true, 아니면 false
+            return user.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .anyMatch(s -> s.equals("admin"));
+        }
     }
 }

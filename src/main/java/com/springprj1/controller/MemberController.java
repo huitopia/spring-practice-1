@@ -46,7 +46,7 @@ public class MemberController {
     public String info(Integer id,
                        Model model,
                        Authentication authentication) {
-        if (service.hasAccess(id, authentication)) { // 권한이 있을 때만
+        if (service.hasAccess(id, authentication) || service.isAdmin(authentication)) { // 권한이 있을 때만
             model.addAttribute("member", service.get(id));
             return "member/info";
         } else { // 권한 없으면 home
